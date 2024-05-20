@@ -30,6 +30,9 @@ services:
         RUN apt-get install -y awscli
 
         RUN usermod -aG docker jenkins
+        RUN usermod -aG daemon jenkins
+        RUN usermod -aG root jenkins
+        USER jenkins
 
     ports:
       - 9080:8080
