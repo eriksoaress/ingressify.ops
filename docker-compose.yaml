@@ -30,43 +30,15 @@ services:
         RUN apt-get install -y awscli
 
         RUN usermod -aG docker jenkins
-      # RUN usermod -aG daemon jenkins
-      # RUN usermod -aG root jenkins
-      # USER jenkins
-      # RUN jenkins-plugin-cli --plugins "blueocean docker-workflow"
+
     ports:
       - 9080:8080
       - 50000:50000
     volumes:
       - $CONFIG/jenkins:/var/jenkins_home
-      # for mac distro
-      - /var/run/docker.sock:/var/run/docker.sock
     restart: always
     networks:
       - infra
-
-  # sonar:
-  #   container_name: sonar
-  #   image: sonarqube:latest
-  #   ports:
-  #     - 9000:9000
-  #   volumes:
-  #     - $CONFIG/sonarqube/data:/opt/sonarqube/data
-  #     - $CONFIG/sonarqube/logs:/opt/sonarqube/logs
-  #     - $CONFIG/sonarqube/extensions:/opt/sonarqube/extensions
-  #   environment:
-  #     - SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
-  #   networks:
-  #     - infra
-
-  # artilleryio:
-  #   container_name: artilleryio
-  #   image: artilleryio/artillery:latest
-  #   # platform: linux/amd64
-  #   volumes:
-  #     - $CONFIG/artilleryio:/artillery
-  #   networks:
-  #     - infra
 
 networks:
   infra:
